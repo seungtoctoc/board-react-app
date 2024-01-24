@@ -1,22 +1,31 @@
 import React from "react";
 import Accordion from 'react-bootstrap/Accordion';
+import Button from 'react-bootstrap/Button';
 
-function AlwaysOpenExample() {
+function AlwaysOpenExample(props) {
+    const writing = props.writing;
+
     return (
-      <Accordion defaultActiveKey={['0']} alwaysOpen>
-        <Accordion.Item eventKey="0">
-          <Accordion.Header>Accordion Item #1</Accordion.Header>
-          <Accordion.Body>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
+        <div className="m-4">
+            <Accordion>
+                <Accordion.Item eventKey="0">
+                    <Accordion.Header>
+                        {writing.title}
+                    </Accordion.Header>
+
+                    <Accordion.Body>
+                        {writing.body}
+
+                        <div className="mt-4 d-flex justify-content-end">
+                            <Button variant="light" className="m-2">Modify</Button>
+                            <Button variant="danger" className="m-2">Delete</Button>{' '}
+                        </div>
+                    </Accordion.Body>
+                    
+                </Accordion.Item>
+            </Accordion>
+        </div>
+     
     );
   }
 

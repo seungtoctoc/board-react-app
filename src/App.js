@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import ThemeProvider from 'react-bootstrap/ThemeProvider'
 import Board from './components/Board'
 
 function App() {
@@ -25,16 +26,12 @@ function App() {
   }, [])
   
     
-
-  
-  
-
-
   return (
-    <div className="App" class={'container mt-5'}>
+    
+    <div className="App container mt-5">
       <Board writings={writings}></Board>
-
     </div>
+
   );
 }
 
