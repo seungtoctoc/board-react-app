@@ -2,8 +2,9 @@ import React, {useState, useEffect} from 'react';
 
 import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Writing from './components/Writing'
+import Board from './components/Board'
 
 function App() {
   const [writings, setWritings] = useState([])
@@ -30,10 +31,8 @@ function App() {
 
 
   return (
-    <div className="App">
-      
-      {/* <Writing></Writing> */}
-
+    <div className="App" class={'container mt-5'}>
+      <Board writings={writings}></Board>
 
     </div>
   );
