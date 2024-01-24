@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from 'react';
 
-import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import ThemeProvider from 'react-bootstrap/ThemeProvider'
 import Board from './components/Board'
 
 function App() {
@@ -25,11 +23,17 @@ function App() {
     })
   }, [])
   
+  function deletePost(post) {
+    setWritings(writings.filter(writing => writing.id != post.id))
+  }
     
   return (
     
     <div className="App container mt-5">
-      <Board writings={writings}></Board>
+      <Board 
+        writings={writings} 
+        deletePost={deletePost}
+      ></Board>
     </div>
 
   );

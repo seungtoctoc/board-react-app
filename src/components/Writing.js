@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 
 function AlwaysOpenExample(props) {
     const writing = props.writing;
+    const deletePost = props.deletePost;
 
     return (
         <div className="m-4">
@@ -18,7 +19,9 @@ function AlwaysOpenExample(props) {
 
                         <div className="mt-4 d-flex justify-content-end">
                             <Button variant="light" className="m-2">Modify</Button>
-                            <Button variant="danger" className="m-2">Delete</Button>{' '}
+                            <Button variant="danger" className="m-2" 
+                                onClick={() => deletePost(writing)}
+                            >Delete</Button>{' '}
                         </div>
                     </Accordion.Body>
                     
