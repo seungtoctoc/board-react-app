@@ -38,39 +38,39 @@ function AlwaysOpenExample(props) {
                     </Accordion.Header>
 
                     <Accordion.Body>
-                        {editing ? (<>
-                            <Form.Control as="textarea" rows={4}
-                                onChange={(e) => setModifyValue(e.target.value)}
-                                onKeyDown={(e) => e.key === 'Enter' && clickCompleteButton()}
-                            />
+                        {editing ? 
+                            <>
+                                <Form.Control as="textarea" rows={4}
+                                    onChange={(e) => setModifyValue(e.target.value)}
+                                    onKeyDown={(e) => e.key === 'Enter' && clickCompleteButton()}
+                                />
 
-                            <div className="mt-4 d-flex justify-content-end">
-                                <Button variant="light" className="m-2"
-                                    onClick={() => clickCompleteButton(writing)}>
-                                    Complete
-                                </Button>
+                                <div className="mt-4 d-flex justify-content-end">
+                                    <Button variant="light" className="m-2"
+                                        onClick={() => clickCompleteButton(writing)}>
+                                        Complete
+                                    </Button>
 
-                                <Button variant="secondary" className="m-2" 
-                                    onClick={() => clickCancelButton()}>
-                                    Cancle
-                                </Button>{' '}
-                            </div>
+                                    <Button variant="secondary" className="m-2" 
+                                        onClick={() => clickCancelButton()}>
+                                        Cancle
+                                    </Button>{' '}
+                                </div>
+                            </> 
+                            : <>
+                                {writing.body}
 
-                        </>) : (<>
-
-                            {writing.body}
-
-                            <div className="mt-4 d-flex justify-content-end">
-                                <Button variant="light" className="m-2"
-                                    onClick={() => clickModifyButton()}>
-                                    Modify
-                                </Button>
-                                
-                                <Button variant="danger" className="m-2" 
-                                    onClick={() => clickDeleteButton(writing)}
-                                >Delete</Button>{' '}
-                            </div>
-                        </>)}        
+                                <div className="mt-4 d-flex justify-content-end">
+                                    <Button variant="light" className="m-2"
+                                        onClick={() => clickModifyButton()}>
+                                        Modify
+                                    </Button>
+                                    
+                                    <Button variant="danger" className="m-2" 
+                                        onClick={() => clickDeleteButton(writing)}
+                                    >Delete</Button>{' '}
+                                </div>
+                            </>}        
                     </Accordion.Body>
                 </Accordion.Item>
             </Accordion>
