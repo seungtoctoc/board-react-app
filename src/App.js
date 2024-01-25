@@ -23,8 +23,19 @@ function App() {
     })
   }, [])
   
-  function deletePost(post) {
-    setWritings(writings.filter(writing => writing.id != post.id))
+  const deleteWriting = (writingToDelete) => {
+    setWritings(writings.filter(writing => 
+      writing.id != writingToDelete.id
+      )
+    );
+  }
+
+  const modifyWriting = (writingToModify, modifyValue) => {
+    setWritings(writings.map((writing) => 
+      writing.id === writingToModify.id ?
+        {...writing, body: modifyValue} : writing
+      )
+    );
   }
     
   return (
@@ -32,7 +43,7 @@ function App() {
     <div className="App container mt-5">
       <Board 
         writings={writings} 
-        deletePost={deletePost}
+        deleteWriting={deleteWriting}
       ></Board>
     </div>
 

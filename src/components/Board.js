@@ -4,7 +4,7 @@ import Writing from './Writing'
 
 export default function Board(props) {
     const writings = props.writings;
-    const deletePost = props.deletePost;
+    const deleteWriting = props.deleteWriting;
 
 
     return (
@@ -12,7 +12,7 @@ export default function Board(props) {
             {writings.map(writing => (
                 <Writing 
                     writing={writing} 
-                    deletePost={deletePost}
+                    deleteWriting={deleteWriting}
                 ></Writing>
             ))}
         </div>

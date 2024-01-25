@@ -5,16 +5,16 @@ import Form from 'react-bootstrap/Form';
 
 function AlwaysOpenExample(props) {
     const writing = props.writing;
-    const deletePost = props.deletePost;
+    const deleteWriting = props.deleteWriting;
     const [editing, setEditing] = useState(false);
     const [modifyValue, setModifyValue] = useState('');
 
-    const clickModifyButton = (writing) => {
+    const clickModifyButton = () => {
         setEditing(true);
     }
 
     const clickDeleteButton = (writing) => {
-        deletePost(writing)
+        deleteWriting(writing)
     }
 
     const clickCompleteButton = (writing) => {
@@ -50,7 +50,7 @@ function AlwaysOpenExample(props) {
                                 </Button>
 
                                 <Button variant="secondary" className="m-2" 
-                                    onClick={() => clickCompleteButton(writing)}>
+                                    onClick={() => clickCancelButton()}>
                                     Cancle
                                 </Button>{' '}
                             </div>
@@ -61,7 +61,7 @@ function AlwaysOpenExample(props) {
 
                             <div className="mt-4 d-flex justify-content-end">
                                 <Button variant="light" className="m-2"
-                                    onClick={() => clickModifyButton(writing)}>
+                                    onClick={() => clickModifyButton()}>
                                     Modify
                                 </Button>
                                 
