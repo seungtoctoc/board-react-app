@@ -1,10 +1,32 @@
-import React from "react";
+import React, {useState} from "react";
 import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 function AlwaysOpenExample(props) {
     const writing = props.writing;
     const deletePost = props.deletePost;
+    const [editing, setEditing] = useState(false);
+    const [modifyValue, setModifyValue] = useState('');
+
+    const clickModifyButton = (writing) => {
+        setEditing(true);
+    }
+
+    const clickDeleteButton = (writing) => {
+        deletePost(writing)
+    }
+
+    const clickCompleteButton = (writing) => {
+        setEditing(false);
+
+
+
+    }
+
+    const clickCancelButton = () => {
+        setEditing(false);
+    }
 
     return (
         <div className="m-4">
@@ -15,16 +37,41 @@ function AlwaysOpenExample(props) {
                     </Accordion.Header>
 
                     <Accordion.Body>
-                        {writing.body}
+                        {editing ? (<>
+                            <Form.Control as="textarea" rows={4}
+                                onChange={(e) => setModifyValue(e.target.value)}
+                                onKeyDown={(e) => e.key === 'Enter' && clickCompleteButton()}
+                            />
 
-                        <div className="mt-4 d-flex justify-content-end">
-                            <Button variant="light" className="m-2">Modify</Button>
-                            <Button variant="danger" className="m-2" 
-                                onClick={() => deletePost(writing)}
-                            >Delete</Button>{' '}
-                        </div>
+                            <div className="mt-4 d-flex justify-content-end">
+                                <Button variant="light" className="m-2"
+                                    onClick={() => clickCompleteButton(writing)}>
+                                    Complete
+                                </Button>
+
+                                <Button variant="secondary" className="m-2" 
+                                    onClick={() => clickCompleteButton(writing)}>
+                                    Cancle
+                                </Button>{' '}
+                            </div>
+
+                        </>) : (<>
+
+                            {writing.body}
+
+                            <div className="mt-4 d-flex justify-content-end">
+                                <Button variant="light" className="m-2"
+                                    onClick={() => clickModifyButton(writing)}>
+                                    Modify
+                                </Button>
+                                
+                                <Button variant="danger" className="m-2" 
+                                    onClick={() => clickDeleteButton(writing)}
+                                >Delete</Button>{' '}
+                            </div>
+                        </>)}
+                        
                     </Accordion.Body>
-                    
                 </Accordion.Item>
             </Accordion>
         </div>
