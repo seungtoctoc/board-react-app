@@ -53,6 +53,11 @@ function App() {
         writing)
     );
   }
+
+  const publishWriting = (title, body) => {
+    let id = writings.length + 1;
+    setWritings([...writings, {title:title, body:body, id:id}])
+  }
     
   return (
     <div className="App">
@@ -62,7 +67,9 @@ function App() {
           modifyWriting={modifyWriting}>   
       </Board>
 
-      <Publish></Publish>
+      <Publish
+        publishWriting={publishWriting}>
+      </Publish>
     </div>
   );
 }
