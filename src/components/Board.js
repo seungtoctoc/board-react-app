@@ -8,7 +8,7 @@ export default function Board(props) {
     const modifyWriting = props.modifyWriting;
 
     return (
-        <div>
+        <div className='container mt-5' style={{zIndex:'1'}}>
             {writings.map(writing => (
                 <Writing 
                     key={writing.id}

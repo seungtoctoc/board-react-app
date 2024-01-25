@@ -56,19 +56,11 @@ function App() {
     
   return (
     <div className="App">
-      <div className='container mt-5' style={{zIndex:'1'}}>
-        <Board
+      <Board
           writings={writings} 
           deleteWriting={deleteWriting}
           modifyWriting={modifyWriting}>   
-        </Board>
-      </div>
-     
-      <div style={{position:'fixed', bottom:'0', margin:'14px', width:'100%'}}>
-        <Button variant="success" style={{width:'300px', zIndex:'2'}}>
-          New Post
-        </Button>
-      </div>
+      </Board>
 
       <Publish></Publish>
     </div>
