@@ -38,12 +38,12 @@ export default function Publish(props) {
                             onKeyDown={(e) => e.key === 'Enter' && clickCompleteButton()}/>
 
                         <div className="mt-4 d-flex justify-content-end">
-                            <Button variant="light" className="m-2"
+                            <Button variant="success" className="m-2"
                                 onClick={(() => clickCompleteButton())}>
                                 Publish
                             </Button>
                                     
-                            <Button variant="danger" className="m-2" 
+                            <Button variant="light" className="m-2" 
                                 onClick={(() => clickCancelButton())}>
                                 Cancel
                             </Button>
