@@ -11,7 +11,7 @@ function App() {
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/posts')
     .then(response => {
-        return response.json();
+      return response.json();
     })
     .then(posts => {
       setWritings(posts);
@@ -25,16 +25,16 @@ function App() {
   
   const deleteWriting = (writingToDelete) => {
     setWritings(writings.filter(writing => 
-      writing.id != writingToDelete.id
-      )
+      writing.id != writingToDelete.id)
     );
   }
 
   const modifyWriting = (writingToModify, modifyValue) => {
     setWritings(writings.map((writing) => 
       writing.id === writingToModify.id ?
-        {...writing, body: modifyValue} : writing
-      )
+        {...writing, body: modifyValue} 
+        : 
+        writing)
     );
   }
     

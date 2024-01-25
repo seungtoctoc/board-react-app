@@ -69,13 +69,11 @@ function AlwaysOpenExample(props) {
                                     onClick={() => clickDeleteButton(writing)}
                                 >Delete</Button>{' '}
                             </div>
-                        </>)}
-                        
+                        </>)}        
                     </Accordion.Body>
                 </Accordion.Item>
             </Accordion>
         </div>
-     
     );
   }
 
