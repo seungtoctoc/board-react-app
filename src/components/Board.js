@@ -5,7 +5,7 @@ import Writing from './Writing'
 export default function Board(props) {
     const writings = props.writings;
     const deleteWriting = props.deleteWriting;
-
+    const modifyWriting = props.modifyWriting;
 
     return (
         <div>
@@ -13,6 +13,7 @@ export default function Board(props) {
                 <Writing 
                     writing={writing} 
                     deleteWriting={deleteWriting}
+                    modifyWriting={modifyWriting}
                 ></Writing>
             ))}
         </div>

@@ -6,6 +6,8 @@ import Form from 'react-bootstrap/Form';
 function AlwaysOpenExample(props) {
     const writing = props.writing;
     const deleteWriting = props.deleteWriting;
+    const modifyWriting = props.modifyWriting;
+
     const [editing, setEditing] = useState(false);
     const [modifyValue, setModifyValue] = useState('');
 
@@ -14,14 +16,12 @@ function AlwaysOpenExample(props) {
     }
 
     const clickDeleteButton = (writing) => {
-        deleteWriting(writing)
+        deleteWriting(writing);
     }
 
     const clickCompleteButton = (writing) => {
         setEditing(false);
-
-
-
+        modifyWriting(writing, modifyValue);
     }
 
     const clickCancelButton = () => {

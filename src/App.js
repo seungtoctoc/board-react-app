@@ -39,14 +39,13 @@ function App() {
   }
     
   return (
-    
     <div className="App container mt-5">
       <Board 
         writings={writings} 
         deleteWriting={deleteWriting}
+        modifyWriting={modifyWriting}
       ></Board>
     </div>
-
   );
 }
 
