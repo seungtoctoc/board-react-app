@@ -11,14 +11,12 @@ export default function Board(props) {
         <div>
             {writings.map(writing => (
                 <Writing 
-                    writing={writing} 
+                    key={writing.id}
+                    writing={writing}
                     deleteWriting={deleteWriting}
                     modifyWriting={modifyWriting}>    
                 </Writing> 
             ))}
-
-            
-            
         </div>
     )
 }
