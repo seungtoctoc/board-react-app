@@ -4,6 +4,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Board from './components/Board'
+import Button from 'react-bootstrap/Button';
 
 function App() {
   const [writings, setWritings] = useState([])
@@ -15,11 +16,6 @@ function App() {
     })
     .then(posts => {
       setWritings(posts);
-    })
-    .then(() => {
-      writings.forEach(cpost => {
-        console.log(cpost.id, cpost.title);
-      });
     })
   }, [])
   
@@ -39,12 +35,24 @@ function App() {
   }
     
   return (
-    <div className="App container mt-5">
-      <Board 
-        writings={writings} 
-        deleteWriting={deleteWriting}
-        modifyWriting={modifyWriting}
-      ></Board>
+    <div className="App">
+      <div className='container mt-5' style={{zIndex:'1'}}>
+        <Board 
+          writings={writings} 
+          deleteWriting={deleteWriting}
+          modifyWriting={modifyWriting}>   
+        </Board>
+      </div>
+     
+      <div style={{position:'fixed', bottom:'0', margin:'14px', width:'100%'}}>
+        <Button variant="success" style={{width:'300px', zIndex:'2'}}>
+          New Post
+        </Button>
+      </div>
+
+      {/* <div style={{width:'100%', position:'fixed', top:'0', backgroundColor:'blue' }}>
+
+      </div> */}
     </div>
   );
 }

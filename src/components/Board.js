@@ -13,9 +13,12 @@ export default function Board(props) {
                 <Writing 
                     writing={writing} 
                     deleteWriting={deleteWriting}
-                    modifyWriting={modifyWriting}
-                ></Writing>
+                    modifyWriting={modifyWriting}>    
+                </Writing> 
             ))}
+
+            
+            
         </div>
     )
 }
