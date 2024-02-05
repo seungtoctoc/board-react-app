@@ -42,7 +42,7 @@ function AlwaysOpenExample(props) {
                             <>
                                 <Form.Control as="textarea" rows={4}
                                     onChange={(e) => setModifyValue(e.target.value)}
-                                    onKeyDown={(e) => e.key === 'Enter' && clickCompleteButton()}
+                                    onKeyDown={(e) => e.key === 'Enter' && clickCompleteButton(writing)}
                                 />
 
                                 <div className="mt-4 d-flex justify-content-end">

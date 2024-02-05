@@ -4,15 +4,18 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Board from './components/Board'
-import Button from 'react-bootstrap/Button';
 import Publish from './components/Publish';
+import axios from 'axios';
+import * as cheerio from 'cheerio';
 
 function App() {
   const [writings, setWritings] = useState([])
+  const url = 'http://127.0.0.1:3000/comment/';
 
   useEffect(() => {
     console.log('useEffect');
-    loadData();
+    // loadData();
+    getCommentsFromMongo();
   }, [])
 
   const loadData = () => {
@@ -43,20 +46,82 @@ function App() {
     // .then(() => {
     //   loadData();
     // })
+
+    axios.delete(url + writingToDelete.id)
+      .then(resp => {
+        console.log(resp.data);
+        getCommentsFromMongo();
+      })
+      .catch(err => {
+        console.log(err);
+      }) 
   }
 
   const modifyWriting = (writingToModify, modifyValue) => {
-    setWritings(writings.map((writing) => 
-      writing.id === writingToModify.id ?
-        {...writing, body: modifyValue} 
-        : 
-        writing)
-    );
+    // setWritings(writings.map((writing) => 
+    //   writing.id === writingToModify.id ?
+    //     {...writing, body: modifyValue} 
+    //     : 
+    //     writing)
+    // );
+
+    const data = {
+      writer : writingToModify.title,
+      content : modifyValue
+    }
+
+    axios.put(url + writingToModify.id, data)
+      .then(resp => {
+        console.log(resp.data);
+        getCommentsFromMongo();
+      })
+      .catch(err => {
+        console.log(err);
+      }) 
+
   }
 
   const publishWriting = (title, body) => {
-    let id = writings.length + 1;
-    setWritings([...writings, {title:title, body:body, id:id}])
+    const data = {
+      writer : title,
+      content : body
+    }
+
+    axios.post(url, data)
+      .then(resp => {
+        console.log(resp.data);
+        getCommentsFromMongo();
+      })
+      .catch(err => {
+        console.log(err);
+      }) 
+    // setWritings([...writings, {title:title, body:body, id:id}])
+  }
+
+  const getCommentsFromMongo = () => {
+    
+    axios.get(url)
+      .then(resp => {
+        const data = resp.data;
+
+        console.log(data);
+      
+
+        const mongoData = data.map(ele => ({
+            title: ele.writer,
+            body: ele.content,
+            id: ele._id
+        }));
+
+        setWritings(mongoData);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    // const $ = cheerio.load(resp.data);
+    
+
+
   }
     
   return (
