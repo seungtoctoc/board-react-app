@@ -6,16 +6,41 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Board from './components/Board'
 import Publish from './components/Publish';
 import axios from 'axios';
+import Search from './components/Search';
+import Header from './components/Header';
 
 function App() {
   const [writings, setWritings] = useState([])
+  const [keyword, setKeyword] = useState('');
   const commentUrl = 'http://127.0.0.1:3000/todo/';
 
+  // useEffect(() => { 
+  //   console.log('start');
+  //   // loadData();
+  //   getComments();
+  // }, [])
+
   useEffect(() => { 
-    console.log('start');
-    // loadData();
-    getComments();
-  }, [])
+    axios.get(commentUrl + keyword)
+      .then(resp => {
+        const data = resp.data;
+
+        console.log(data);
+      
+        const mongoData = data.map(ele => ({
+            writer: ele.writer,
+            content: ele.content,
+            color: ele.color,
+            id: ele._id
+        }));
+
+        setWritings(mongoData);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+
+  }, [keyword])
 
   // const loadData = () => {
   //   fetch('https://jsonplaceholder.typicode.com/posts')
@@ -124,6 +149,11 @@ function App() {
     
   return (
     <div className="App">
+      <Header></Header>
+
+      <Search
+        setKeyword={setKeyword}>
+      </Search>
 
       <Board
           writings={writings} 
