@@ -4,6 +4,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Color from './Color'
+import color from './Color'
 
 function AlwaysOpenExample(props) {
     const writing = props.writing;
