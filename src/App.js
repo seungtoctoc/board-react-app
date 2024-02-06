@@ -109,8 +109,8 @@ function App() {
       
 
         const mongoData = data.map(ele => ({
-            title: ele.writer,
-            body: ele.content,
+            writer: ele.writer,
+            content: ele.content,
             color: ele.color,
             id: ele._id
         }));

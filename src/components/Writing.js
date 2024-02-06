@@ -43,7 +43,7 @@ function AlwaysOpenExample(props) {
     }
 
     return (
-        <div className="m-4" style={{border: '2px solid', borderColor: borderColor, borderRadius: '8px'}}>
+        <div className="m-4" style={{border: '4px solid', borderColor: borderColor, borderRadius: '10px'}}>
             <Accordion>
                 <Accordion.Item eventKey="0">
                     <Accordion.Header>
@@ -52,10 +52,11 @@ function AlwaysOpenExample(props) {
                                 <Form.Control as="textarea" rows={1}
                                 onChange={(e) => setModifyTitle(e.target.value)}
                                 onKeyDown={(e) => e.key === 'Enter' && clickCompleteButton(writing)}
+                                placeholder={writing.writer}
                                 />
                             </>
                             :
-                            writing.title
+                            writing.writer
                         
                         }
                     </Accordion.Header>
@@ -66,6 +67,7 @@ function AlwaysOpenExample(props) {
                                 <Form.Control as="textarea" rows={4}
                                     onChange={(e) => setModifyContent(e.target.value)}
                                     onKeyDown={(e) => e.key === 'Enter' && clickCompleteButton(writing)}
+                                    placeholder={writing.content}
                                 />
 
                                 <Color
@@ -84,7 +86,7 @@ function AlwaysOpenExample(props) {
                                 </div>
                             </> 
                             : <>
-                                {writing.body}
+                                {writing.content}
 
                                 <div className="mt-4 d-flex justify-content-end">
                                     <Button variant="light" className="m-2"
