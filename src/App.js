@@ -9,9 +9,9 @@ import axios from 'axios';
 
 function App() {
   const [writings, setWritings] = useState([])
-  const commentUrl = 'http://127.0.0.1:3000/comment/';
+  const commentUrl = 'http://127.0.0.1:3000/todo/';
 
-  useEffect(() => {
+  useEffect(() => { 
     console.log('start');
     // loadData();
     getComments();
@@ -56,7 +56,7 @@ function App() {
       }) 
   }
 
-  const modifyWriting = (writingToModify, modifyValue) => {
+  const modifyWriting = (writingToModify, modifyTitle, modifyContent, modifyColor) => {
     // setWritings(writings.map((writing) => 
     //   writing.id === writingToModify.id ?
     //     {...writing, body: modifyValue} 
@@ -65,8 +65,9 @@ function App() {
     // );
 
     const data = {
-      writer : writingToModify.title,
-      content : modifyValue
+      writer : modifyTitle,
+      content : modifyContent,
+      color : modifyColor
     }
 
     axios.put(commentUrl + writingToModify.id, data)
@@ -79,10 +80,11 @@ function App() {
       }) 
   }
 
-  const publishWriting = (title, body) => {
+  const publishWriting = (title, body, color) => {
     const data = {
       writer : title,
-      content : body
+      content : body,
+      color : color
     }
 
     axios.post(commentUrl, data)
@@ -109,6 +111,7 @@ function App() {
         const mongoData = data.map(ele => ({
             title: ele.writer,
             body: ele.content,
+            color: ele.color,
             id: ele._id
         }));
 
@@ -121,6 +124,7 @@ function App() {
     
   return (
     <div className="App">
+
       <Board
           writings={writings} 
           deleteWriting={deleteWriting}

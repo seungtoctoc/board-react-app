@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Color from './Color'
 
 function AlwaysOpenExample(props) {
     const writing = props.writing;
@@ -10,7 +11,19 @@ function AlwaysOpenExample(props) {
     const modifyWriting = props.modifyWriting;
 
     const [editing, setEditing] = useState(false);
-    const [modifyValue, setModifyValue] = useState('');
+    const [modifyTitle, setModifyTitle] = useState('');
+    const [modifyContent, setModifyContent] = useState('');
+    const [modifyColor, setModifyColor] = useState(writing.color);
+
+    const color = [
+        '#C6DBDA',
+        '#FEE1E8',
+        '#FED7C3',
+        '#F6EAC2',
+        '#ECD5E3'
+    ]
+
+    const borderColor = color[writing.color];
 
     const clickModifyButton = () => {
         setEditing(true);
@@ -22,7 +35,7 @@ function AlwaysOpenExample(props) {
 
     const clickCompleteButton = (writing) => {
         setEditing(false);
-        modifyWriting(writing, modifyValue);
+        modifyWriting(writing, modifyTitle, modifyContent, modifyColor);
     }
 
     const clickCancelButton = () => {
@@ -30,20 +43,33 @@ function AlwaysOpenExample(props) {
     }
 
     return (
-        <div className="m-4">
+        <div className="m-4" style={{border: '2px solid', borderColor: borderColor, borderRadius: '8px'}}>
             <Accordion>
                 <Accordion.Item eventKey="0">
                     <Accordion.Header>
-                        {writing.title}
+                        {editing ?
+                            <>
+                                <Form.Control as="textarea" rows={1}
+                                onChange={(e) => setModifyTitle(e.target.value)}
+                                onKeyDown={(e) => e.key === 'Enter' && clickCompleteButton(writing)}
+                                />
+                            </>
+                            :
+                            writing.title
+                        
+                        }
                     </Accordion.Header>
 
                     <Accordion.Body>
                         {editing ? 
                             <>
                                 <Form.Control as="textarea" rows={4}
-                                    onChange={(e) => setModifyValue(e.target.value)}
+                                    onChange={(e) => setModifyContent(e.target.value)}
                                     onKeyDown={(e) => e.key === 'Enter' && clickCompleteButton(writing)}
                                 />
+
+                                <Color
+                                    setColor={setModifyColor}></Color>
 
                                 <div className="mt-4 d-flex justify-content-end">
                                     <Button variant="light" className="m-2"

@@ -2,11 +2,13 @@ import React, {useState} from "react";
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Color from './Color'
 
 export default function Publish(props) {
     const [publishing, setPublishing] = useState(false);
     const [bodyValue, setBodyValue] = useState('');
     const [titleValue, setTitleValue] = useState('');
+    const [color, setColor] = useState(1);
 
     const publishWriting = props.publishWriting;
 
@@ -19,7 +21,7 @@ export default function Publish(props) {
     }
 
     const clickCompleteButton = () => {
-        publishWriting(titleValue, bodyValue);
+        publishWriting(titleValue, bodyValue, color);
         setPublishing(false);
     }
     
@@ -28,7 +30,7 @@ export default function Publish(props) {
             {publishing ? 
             <>
                 <div style={{width:'100%', height:'100%', position:'fixed', top:'0', display:'flex', alignItems:'center'}}>
-                    <div style={{width:'80%', maxWidth:'600px', height:'400px', backgroundColor:'#FEE1E8', margin:'0 auto', padding:'30px'}}>
+                    <div style={{width:'80%', maxWidth:'600px', height:'480px', backgroundColor:'#EDECF2', margin:'0 auto', padding:'30px'}}>
                         <Form.Control as="textarea" rows={1}
                             onChange={(e) => setTitleValue(e.target.value)}
                             style={{marginBottom:'10px'}}/>
@@ -36,6 +38,11 @@ export default function Publish(props) {
                         <Form.Control as="textarea" rows={9}
                             onChange={(e) => setBodyValue(e.target.value)}
                             onKeyDown={(e) => e.key === 'Enter' && clickCompleteButton()}/>
+
+                        
+                        <Color setColor={setColor}></Color>
+
+
 
                         <div className="mt-4 d-flex justify-content-end">
                             <Button variant="success" className="m-2"
