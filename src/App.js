@@ -6,32 +6,31 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Board from './components/Board'
 import Publish from './components/Publish';
 import axios from 'axios';
-import * as cheerio from 'cheerio';
 
 function App() {
   const [writings, setWritings] = useState([])
-  const url = 'http://127.0.0.1:3000/comment/';
+  const commentUrl = 'http://127.0.0.1:3000/comment/';
 
   useEffect(() => {
-    console.log('useEffect');
+    console.log('start');
     // loadData();
-    getCommentsFromMongo();
+    getComments();
   }, [])
 
-  const loadData = () => {
-    fetch('https://jsonplaceholder.typicode.com/posts')
-    .then(response => {
-      return response.json();
-    })
-    .then(posts => {
-      setWritings(posts);
-      console.log('load set Writings');
-    })
-  }
+  // const loadData = () => {
+  //   fetch('https://jsonplaceholder.typicode.com/posts')
+  //   .then(response => {
+  //     return response.json();
+  //   })
+  //   .then(posts => {
+  //     setWritings(posts);
+  //     console.log('load set Writings');
+  //   })
+  // }
   
   const deleteWriting = (writingToDelete) => {
     setWritings(writings.filter(writing => 
-      writing.id != writingToDelete.id)
+      writing.id !== writingToDelete.id)
     );
 
     // fetch(`https://jsonplaceholder.typicode.com/posts/${writingToDelete.id}`, {
@@ -47,10 +46,10 @@ function App() {
     //   loadData();
     // })
 
-    axios.delete(url + writingToDelete.id)
+    axios.delete(commentUrl + writingToDelete.id)
       .then(resp => {
         console.log(resp.data);
-        getCommentsFromMongo();
+        getComments();
       })
       .catch(err => {
         console.log(err);
@@ -70,15 +69,14 @@ function App() {
       content : modifyValue
     }
 
-    axios.put(url + writingToModify.id, data)
+    axios.put(commentUrl + writingToModify.id, data)
       .then(resp => {
         console.log(resp.data);
-        getCommentsFromMongo();
+        getComments();
       })
       .catch(err => {
         console.log(err);
       }) 
-
   }
 
   const publishWriting = (title, body) => {
@@ -87,10 +85,10 @@ function App() {
       content : body
     }
 
-    axios.post(url, data)
+    axios.post(commentUrl, data)
       .then(resp => {
         console.log(resp.data);
-        getCommentsFromMongo();
+        getComments();
       })
       .catch(err => {
         console.log(err);
@@ -98,9 +96,10 @@ function App() {
     // setWritings([...writings, {title:title, body:body, id:id}])
   }
 
-  const getCommentsFromMongo = () => {
-    
-    axios.get(url)
+  const getComments = () => {
+    console.log('get comments!')
+
+    axios.get(commentUrl)
       .then(resp => {
         const data = resp.data;
 
@@ -118,10 +117,6 @@ function App() {
       .catch(err => {
         console.log(err);
       })
-    // const $ = cheerio.load(resp.data);
-    
-
-
   }
     
   return (
