@@ -28,10 +28,10 @@ function App() {
         console.log(data);
       
         const mongoData = data.map(ele => ({
-            writer: ele.writer,
-            content: ele.content,
-            color: ele.color,
-            id: ele._id
+          writer: ele.writer,
+          content: ele.content,
+          color: ele.color,
+          id: ele._id
         }));
 
         setWritings(mongoData);
